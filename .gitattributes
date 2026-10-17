@@ -1,0 +1,22 @@
+# Normalise text files to LF in the repository and working tree (consistent across Windows/Linux).
+* text=auto eol=lf
+
+# Windows-only scripts keep CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary assets (normally git-ignored; listed so they are never diffed or normalised).
+*.pt binary
+*.onnx binary
+*.engine binary
+*.mp4 binary
+*.avi binary
+*.mkv binary
+*.mov binary
+*.jpg binary
+*.jpeg binary
+*.png binary
+
+# Lockfile: treat as generated in diffs.
+worker/package-lock.json linguist-generated=true -diff
