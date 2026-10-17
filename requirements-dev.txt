@@ -1,0 +1,3 @@
+-r requirements-edge.txt
+pytest>=8,<10
+ruff>=0.6

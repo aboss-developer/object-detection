@@ -1,0 +1,24 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "alpha-vision-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-09-01",
+  "observability": { "enabled": true },
+
+  // Per-camera alert state (threshold armed/active, cooldown, de-dup of event IDs).
+  // A Durable Object serialises events for one camera, so concurrent or retried
+  // requests can never produce duplicate Telegram alerts.
+  "durable_objects": {
+    "bindings": [{ "name": "CAMERA_STATE", "class_name": "CameraAlertState" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["CameraAlertState"] }],
+
+  // Non-secret settings. Secrets (INGEST_TOKEN, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID)
+  // are set with `wrangler secret put` (production) or .dev.vars (local only).
+  "vars": {
+    "PERSON_ALERT_THRESHOLD": "5",
+    "ALERT_COOLDOWN_SECONDS": "600",
+    "MAX_EVENT_AGE_SECONDS": "300",
+    "ALLOWED_CAMERA_IDS": "camera-01"
+  }
+}

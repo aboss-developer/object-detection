@@ -1,0 +1,10 @@
+# Copy to .dev.vars for `wrangler dev` ONLY. .dev.vars is git-ignored; never commit real values.
+# Production secrets are set with `npx wrangler secret put <NAME>`.
+
+# Shared bearer token; must equal WORKER_INGEST_TOKEN in the edge .env (>= 32 chars).
+# Generate: python -c "import secrets; print(secrets.token_urlsafe(48))"
+INGEST_TOKEN=replace-with-a-long-random-token-at-least-32-chars
+
+# Telegram bot token from @BotFather and the target chat id (use a test chat locally).
+TELEGRAM_BOT_TOKEN=
+TELEGRAM_CHAT_ID=
